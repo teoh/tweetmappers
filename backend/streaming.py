@@ -1,4 +1,5 @@
 import tweepy
+import states
 import json
 import pprint
 
@@ -25,4 +26,5 @@ class PrintTweetsListener(StreamListener):
         return True
 
 stream = Stream(auth, PrintTweetsListener())
-stream.filter(track=['hillary', 'clinton', 'donald', 'trump'])
+stream.filter(track=['donald trump', 'hillary clinton', 'hillary', 'clinton',
+                     'donald', 'trump'])
