@@ -52,7 +52,7 @@ def get_tweets(data):
 	tweets = []
 	for d in data['statuses']:
 		# print json.dumps(d, indent=4)
-		text = strip_non_ascii(d.pop('text', {}))
+		text = strip_non_ascii(d.pop('text', {})).replace('\n', ' ')
 		user = d.pop('user', {})
 		location_str = user.pop('location', '')
 		label = 0
@@ -69,5 +69,5 @@ def process_tweets(candidate):
 			f.write(tweet.text + '\n')
 
 
-process_tweets('trump')
+process_tweets('hillary')
 
