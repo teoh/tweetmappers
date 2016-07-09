@@ -1,0 +1,134 @@
+{
+  "statuses":  [
+     {
+      "created_at": "Sat Jul 09 20:50:58 +0000 2016",
+      "id": 751881354200043500,
+      "id_str": "751881354200043520",
+      "text": "My 88 year-old grandpa is "fired" up about Hillary. "great". Are you? :) https://t.co/CJHhSDwW7g",
+      "truncated": false,
+      "entities":  {
+        "hashtags":  [],
+        "symbols":  [],
+        "user_mentions":  [],
+        "urls":  [],
+        "media":  [
+           {
+            "id": 751881326244950000,
+            "id_str": "751881326244950016",
+            "indices":  [
+              62,
+              85
+            ],
+            "media_url": "http://pbs.twimg.com/media/Cm84FSQUcAAxzsh.jpg",
+            "media_url_https": "https://pbs.twimg.com/media/Cm84FSQUcAAxzsh.jpg",
+            "url": "https://t.co/CJHhSDwW7g",
+            "display_url": "pic.twitter.com/CJHhSDwW7g",
+            "expanded_url": "http://twitter.com/andrewiannellod/status/751881354200043520/photo/1",
+            "type": "photo",
+            "sizes":  {
+              "medium":  {
+                "w": 675,
+                "h": 1200,
+                "resize": "fit"
+              },
+              "small":  {
+                "w": 383,
+                "h": 680,
+                "resize": "fit"
+              },
+              "thumb":  {
+                "w": 150,
+                "h": 150,
+                "resize": "crop"
+              },
+              "large":  {
+                "w": 1080,
+                "h": 1920,
+                "resize": "fit"
+              }
+            }
+          }
+        ]
+      },
+      "metadata":  {
+        "iso_language_code": "en",
+        "result_type": "recent"
+      },
+      "source": "<a href="http://twitter.com/download/android" rel="nofollow">Twitter for Android</a>",
+      "in_reply_to_status_id": null,
+      "in_reply_to_status_id_str": null,
+      "in_reply_to_user_id": null,
+      "in_reply_to_user_id_str": null,
+      "in_reply_to_screen_name": null,
+      "user":  {
+        "id": 1046199937,
+        "id_str": "1046199937",
+        "name": "Andrew Dalton",
+        "screen_name": "andrewiannellod",
+        "location": "Cupertino, CA",
+        "description": "",
+        "url": null,
+        "entities":  {
+          "description":  {
+            "urls":  []
+          }
+        },
+        "protected": false,
+        "followers_count": 69,
+        "friends_count": 37,
+        "listed_count": 0,
+        "created_at": "Sat Dec 29 22:48:18 +0000 2012",
+        "favourites_count": 379,
+        "utc_offset": null,
+        "time_zone": null,
+        "geo_enabled": false,
+        "verified": false,
+        "statuses_count": 199,
+        "lang": "en",
+        "contributors_enabled": false,
+        "is_translator": false,
+        "is_translation_enabled": false,
+        "profile_background_color": "C0DEED",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_tile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/727873972507922432/J2qzzaSv_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/727873972507922432/J2qzzaSv_normal.jpg",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/1046199937/1451713219",
+        "profile_link_color": "0084B4",
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_use_background_image": true,
+        "has_extended_profile": false,
+        "default_profile": true,
+        "default_profile_image": false,
+        "following": false,
+        "follow_request_sent": false,
+        "notifications": false
+      },
+      "geo": null,
+      "coordinates": null,
+      "place": null,
+      "contributors": null,
+      "is_quote_status": false,
+      "retweet_count": 0,
+      "favorite_count": 0,
+      "favorited": false,
+      "retweeted": false,
+      "possibly_sensitive": false,
+      "lang": "en"
+    }
+  ],
+  "search_metadata":  {
+    "completed_in": 0.028,
+    "max_id": 751881354200043500,
+    "max_id_str": "751881354200043520",
+    "next_results": "?max_id=751881354200043519&q=hillary%20OR%20clinton%20OR%20democrat%20OR%20liberal%20OR%20hillaryclinton%20-donald%20-trump%20-republican%20-conservative%20-realdonaldtrump%20%3A%29%20filter%3Asafe&count=1&include_entities=1",
+    "query": "hillary+OR+clinton+OR+democrat+OR+liberal+OR+hillaryclinton+-donald+-trump+-republican+-conservative+-realdonaldtrump+%3A%29+filter%3Asafe",
+    "refresh_url": "?since_id=751881354200043520&q=hillary%20OR%20clinton%20OR%20democrat%20OR%20liberal%20OR%20hillaryclinton%20-donald%20-trump%20-republican%20-conservative%20-realdonaldtrump%20%3A%29%20filter%3Asafe&include_entities=1",
+    "count": 1,
+    "since_id": 0,
+    "since_id_str": "0"
+  }
+}
