@@ -21,7 +21,8 @@ def treat_quotes(input_file):
 				value = value.replace('"', '\\"')
 				target.write(key + '": "' + value + ('",\n' if end==-3 else '"\n'))
 			else:
-				target.write(line)
+				if line[0] in ['{', ' ', '}']:
+					target.write(line)
 
 	return output_file
 	
@@ -29,16 +30,18 @@ def parse_json(input_file):
 	with open(input_file) as data_file:    
 	    return json.load(data_file)
 
-def get_location(data):
-	d = data['statuses'][0]
-	# print json.dumps(d, indent=4)
-	user = d.pop('user', {})
-	location = user.pop('location', '')
-	return location
+def get_locations(data):
+	locations = []
+	for d in data['statuses']:
+		# print json.dumps(d, indent=4)
+		user = d.pop('user', {})
+		locations.append(user.pop('location', ''))
+	return locations
 
 
-treated_file = treat_quotes('1_tweet_happy_hillary.json')
+treated_file = treat_quotes('100_tweets_happy_hillary.json')
 data = parse_json(treated_file)
 
-print "The location is = " + get_location(data)
+for location in get_locations(data):
+	print "Location = " + location
 
