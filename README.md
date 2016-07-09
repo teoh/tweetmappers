@@ -1,3 +1,2 @@
 # tweetmappers
-
-Hackfest 2016
+Project for Hackfest 2016
