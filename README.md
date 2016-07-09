@@ -1,2 +1,2 @@
 # tweetmappers
-Project for Greylock Hackfest 2016
+Project for Hackfest 2016, which was hosted in the Facebook HQ in Menlo Park, CA.
