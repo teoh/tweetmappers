@@ -1,2 +1,2 @@
 # tweetmappers
-Project for Hackfest 2016
+Project for Greylock Hackfest 2016
