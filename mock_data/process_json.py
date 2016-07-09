@@ -44,11 +44,15 @@ def parse_json(input_file):
 	with open(input_file) as data_file:    
 	    return json.load(data_file)
 
+def strip_non_ascii(text):
+	new_text = [c for c in text if ord(c) < 128]
+	return ''.join(new_text)
+
 def get_tweets(data):
 	tweets = []
 	for d in data['statuses']:
 		# print json.dumps(d, indent=4)
-		text = d.pop('text', {})
+		text = strip_non_ascii(d.pop('text', {}))
 		user = d.pop('user', {})
 		location_str = user.pop('location', '')
 		label = 0
@@ -56,10 +60,14 @@ def get_tweets(data):
 
 	return tweets
 
+def process_tweets(candidate):
+	treated_file = treat_quotes('tweets_%s.json' % candidate)
+	data = parse_json(treated_file)
 
-treated_file = treat_quotes('100_tweets_happy_hillary.json')
-data = parse_json(treated_file)
+	with open('tweets_%s.txt' % candidate, 'w') as f:
+		for tweet in get_tweets(data):
+			f.write(tweet.text + '\n')
 
-for tweet in get_tweets(data):
-	tweet.print_tweet()
+
+process_tweets('trump')
 
