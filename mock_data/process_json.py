@@ -1,6 +1,20 @@
 import json
 from pprint import pprint
 
+class Tweet(object):
+
+	def __init__(self, text_, location_str_, label_):
+		self.text = text_
+		self.location_str = location_str_
+		self.label = label_
+
+
+	def print_tweet(self):
+		print self.text
+		print 'Location = ' + self.location_str
+		print '########################################################################################################################'
+
+
 def treat_quotes(input_file):
 
 	output_file = input_file.replace('.json', '_treated.json')
@@ -30,18 +44,22 @@ def parse_json(input_file):
 	with open(input_file) as data_file:    
 	    return json.load(data_file)
 
-def get_locations(data):
-	locations = []
+def get_tweets(data):
+	tweets = []
 	for d in data['statuses']:
 		# print json.dumps(d, indent=4)
+		text = d.pop('text', {})
 		user = d.pop('user', {})
-		locations.append(user.pop('location', ''))
-	return locations
+		location_str = user.pop('location', '')
+		label = 0
+		tweets.append(Tweet(text, location_str, label))
+
+	return tweets
 
 
 treated_file = treat_quotes('100_tweets_happy_hillary.json')
 data = parse_json(treated_file)
 
-for location in get_locations(data):
-	print "Location = " + location
+for tweet in get_tweets(data):
+	tweet.print_tweet()
 
