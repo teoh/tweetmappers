@@ -41,7 +41,7 @@ def treat_quotes(input_file):
 	return output_file
 	
 def parse_json(input_file):
-	with open(input_file) as data_file:    
+	with open(input_file) as data_file:
 	    return json.load(data_file)
 
 def strip_non_ascii(text):
