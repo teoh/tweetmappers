@@ -10,10 +10,14 @@ class SocketHandler(websocket.WebSocketHandler):
         return True
 
     def open(self):
+	print "open"
         cl.add(self)
+	print cl
 
     def on_close(self):
+	print "close"
         cl.remove(self)
+	print cl
 
 def write(message):
     print 'Sending...'

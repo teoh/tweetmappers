@@ -1,3 +1,4 @@
 /credentials.json
 /.env
 .idea
+*.pyc

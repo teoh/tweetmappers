@@ -40,6 +40,7 @@
             padding: 0;
             margin: 0;
             font-weight: bold;
+
         }
 
         .swing.tweet {
@@ -87,25 +88,26 @@
         }
     };
 
+    var ws = new WebSocket("ws://192.241.220.196:8888/ws");
+
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 4,
             center: {lat: 39.8, lng: -75.5}
         });
         var markers = Markers(map);
-        setInterval(function () {
+        var overlay = window.overlay(map);
+        ws.onmessage = function (evt)
+        {
+            var data = JSON.parse(evt.data);
             markers.addMarker({
-                lat: 39.8 + (Math.random() - 0.5) * 10,
-                lng: -95.5 + (Math.random() - 0.5) * 30,
+                lat: Number(data.lat),
+                lng: Number(data.lon),
                 text: "Hillary",
                 sem: (Math.random() > 0.5) ? "hillary" : "trump"
             });
-        }, 500);
-
-        var overlay = window.overlay(map);
-        setInterval(function () {
-            overlay.addTweet({text: "Dupa: " + Math.random().toString()});
-        }, 500);
+            overlay.addTweet({text: data.tweet.text});
+        };
     }
 </script>
 <script async defer
