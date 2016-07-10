@@ -69,5 +69,5 @@ def process_tweets(candidate):
 		print "Number of distinct tweets processed = ", len(id_set)
 
 
-process_tweets('trump')
+process_tweets('hillary')
 
