@@ -1,5 +1,18 @@
 import json
 from pprint import pprint
+import time
+import random
+
+from repustate import Client
+repustate_client = Client(api_key='61f177d260b047b2626537561dc9920c305cb242', version='v3')
+
+def strip_non_ascii(text):
+	new_text = [c for c in text if ord(c) < 128]
+	return ''.join(new_text)
+
+def get_sentiment(text):
+    return repustate_client.sentiment(strip_non_ascii(text))['score']
+    # return random.uniform(-1.0, 1.0)
 
 class Tweet(object):
 
@@ -39,9 +52,6 @@ def parse_json(input_file):
 	with open(input_file) as data_file:
 	    return json.load(data_file)
 
-def strip_non_ascii(text):
-	new_text = [c for c in text if ord(c) < 128]
-	return ''.join(new_text)
 
 def get_tweets(data):
 	tweets = []
@@ -69,5 +79,18 @@ def process_tweets(candidate):
 		print "Number of distinct tweets processed = ", len(id_set)
 
 
-process_tweets('hillary')
+def classify_tweets(candidate):
+
+	with open('tweets_%s.txt' % candidate, 'r') as r:
+		with open('classified_tweets_%s.csv' % candidate, 'w') as w:
+			tweets = r.readlines()
+			for tweet in tweets:
+				score = get_sentiment(tweet)
+				w.write('"%f","%s"\n' % (score, tweet[:-1]))
+
+
+start = time.time()
+classify_tweets('trump')
+print "Done, time elapsed (s) = ", time.time() - start
+
 
