@@ -15,28 +15,43 @@ trained_model_pickle_path = './model/classif_model.p'
 raw_tweets = []
 labels = []
 
-with open('./data/hillary_sample.csv') as csvfile:
+
+print 'Collecting the tweets...'
+with open('./data/hillary_classified.csv') as csvfile:
 	trainreader = csv.reader(csvfile,delimiter=',',quotechar='"')
 	for row in trainreader:
-		raw_tweets.append(row[1])
-		labels.append(row[0])
+		label = float(row[0])
+		if label != 0.0:
+			raw_tweets.append(row[1])
+			labels.append(1 if label > 0.0 else -1)
 
+with open('./data/trump_classified.csv') as csvfile:
+	trainreader = csv.reader(csvfile,delimiter=',',quotechar='"')
+	for row in trainreader:
+		label = float(row[0])
+		if label != 0.0:
+			raw_tweets.append(row[1])
+			labels.append(2 if label > 0.0 else -2)
 
 # clean the tweets 
 
 t = tt()
+print 'Cleaning the tweets...'
 cleaned_tweets = batch_get_legit_tokens(raw_tweets)
 
 # extract features
+
+print 'Extracting the features...'
 create_features(get_all_words(cleaned_tweets))
 
 assert len(cleaned_tweets) == len(labels)
-training_set = nltk.classify.apply_features(extract_features,zip(cleaned_tweets,labels))
 
-print training_set[0]
+print 'Constructing training set...'
+training_set = nltk.classify.apply_features(extract_features,zip(cleaned_tweets,labels))
 
 # train model
 
+print 'Training the model...'
 classifier = nltk.NaiveBayesClassifier.train(training_set)
 print tt() - t
 
