@@ -1,5 +1,7 @@
-from tornado import websocket, web, ioloop
 import json
+
+from tornado import websocket, web, ioloop
+from threading import Thread
 
 cl = set()
 
@@ -25,6 +27,9 @@ app = web.Application([
     (r'/ws', SocketHandler),
 ])
 
-if __name__ == '__main__':
+def main():
     app.listen(8888)
     ioloop.IOLoop.instance().start()
+
+my_thread = Thread(main)
+my_thread.start()
