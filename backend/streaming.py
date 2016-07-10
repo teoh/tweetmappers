@@ -5,6 +5,7 @@ import app
 import json
 import pprint
 import re
+import sentiment_classifier
 
 from tweepy import OAuthHandler
 from tweepy import Stream
@@ -34,6 +35,7 @@ trump_first = 'donald'
 
 clinton_last = 'clinton'
 trump_last = 'trump'
+
 
 def tweet_subject(tweet):
     processed = tweet.get('text')
@@ -72,6 +74,7 @@ class PrintTweetsListener(StreamListener):
                 if location:
                     lon = location['lon']
                     lat = location['lat']
+                    score = get_sentiment(tweet['text'])
                     if wordfilter.blacklisted(tweet['text']):
                         exp = '(%s)' % '|'.join(wordfilter.blacklist)
                         r = re.compile(exp, re.IGNORECASE)
@@ -81,7 +84,8 @@ class PrintTweetsListener(StreamListener):
                     tweet_package = {
                             'tweet': tweet,
                             'lon': lon,
-                            'lat': lat
+                            'lat': lat,
+                            'score': score
                     }
                     app.write(json.dumps(tweet_package))
         return True
