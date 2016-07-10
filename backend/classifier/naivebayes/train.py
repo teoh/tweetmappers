@@ -28,7 +28,14 @@ cleaned_tweets = batch_get_legit_tokens(raw_tweets)
 word_features = create_features(get_all_words(cleaned_tweets))
 
 print len(word_features)
-print tt() -t
+
+print cleaned_tweets[0]
+
+print extract_features(cleaned_tweets[0])
+
+print tt() - t
+
+
 
 
 # train model
