@@ -4,25 +4,25 @@ var Markers = function (map) {
         url: 'hillary_positive.png',
         size: new google.maps.Size(40, 40),
         origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(0, 32)
+        anchor: new google.maps.Point(20, 20)
     };
     var hillary_negative_img = {
         url: 'hillary_negative.png',
         size: new google.maps.Size(40, 40),
         origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(0, 32)
+        anchor: new google.maps.Point(20, 20)
     };
     var trump_positive_img = {
         url: 'trump_positive.png',
         size: new google.maps.Size(40, 40),
         origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(0, 30)
+        anchor: new google.maps.Point(20, 20)
     };
     var trump_negative_img = {
         url: 'trump_negative.png',
         size: new google.maps.Size(40, 40),
         origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(0, 30)
+        anchor: new google.maps.Point(20, 20)
     };
     var markers = [];
     return {
