@@ -20,7 +20,7 @@ auth.set_access_token(access_token, access_secret)
 
 wordfilter = Wordfilter()
 with open('../sensitivewords.json') as sensitive_file:
-    sensitive_words = json.load(sensitive_file)['words']
+    sensitive_words = json.load(sensitive_file)['badwords']
     wordfilter.add_words(sensitive_words)
 
 class TweetSubject(object):
