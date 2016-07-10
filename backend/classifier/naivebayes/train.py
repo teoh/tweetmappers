@@ -8,30 +8,23 @@ from features import *
 
 trained_model_pickle_path = './model/classif_model.p'
 
+def collect_tweets(candidate, raw_tweets, labels):
+	with open('./data/%s_classified.csv' % candidate) as csvfile:
+		trainreader = csv.reader(csvfile,delimiter=',',quotechar='"')
+		for row in trainreader:
+			label = float(row[0])
+			if label != 0.0:
+				raw_tweets.append(row[1])
+				labels.append(1 if label > 0.0 else -1)
+
 # ======================
 
 # collect the tweets
-
+print 'Collecting the tweets...'
 raw_tweets = []
 labels = []
-
-
-print 'Collecting the tweets...'
-with open('./data/hillary_classified.csv') as csvfile:
-	trainreader = csv.reader(csvfile,delimiter=',',quotechar='"')
-	for row in trainreader:
-		label = float(row[0])
-		if label != 0.0:
-			raw_tweets.append(row[1])
-			labels.append(1 if label > 0.0 else -1)
-
-with open('./data/trump_classified.csv') as csvfile:
-	trainreader = csv.reader(csvfile,delimiter=',',quotechar='"')
-	for row in trainreader:
-		label = float(row[0])
-		if label != 0.0:
-			raw_tweets.append(row[1])
-			labels.append(2 if label > 0.0 else -2)
+collect_tweets('hillary', raw_tweets, labels)
+collect_tweets('trump', raw_tweets, labels)
 
 # clean the tweets 
 
