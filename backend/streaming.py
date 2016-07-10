@@ -8,6 +8,7 @@ import pprint
 from tweepy import OAuthHandler
 from tweepy import Stream
 from tweepy.streaming import StreamListener
+from wordfilter import Wordfilter
 
 with open('../credentials.json') as credentials_file:
     credentials = json.load(credentials_file)
@@ -57,6 +58,7 @@ def tweet_in_us(tweet):
 
 class PrintTweetsListener(StreamListener):
     def on_data(self, data):
+        wordfilter = Wordfilter()
         tweet = json.loads(data)
         if tweet_in_us(tweet):
             subject = tweet_subject(tweet)
@@ -65,13 +67,16 @@ class PrintTweetsListener(StreamListener):
                 if location:
                     lon = location['lon']
                     lat = location['lat']
-                    if not tweet['possibly_sensitive']:
-                        tweet_package = {
-                                'tweet': tweet,
-                                'lon': lon,
-                                'lat': lat
-                        }
-                        app.write(json.dumps(tweet_package))
+                    print '################# Text ###################'
+                    print tweet['text']
+                    if wordfilter.blacklisted(tweet['text']):
+                        tweet['text'] = 'Hidden because possibly sensitive'
+                    tweet_package = {
+                            'tweet': tweet,
+                            'lon': lon,
+                            'lat': lat
+                    }
+                    app.write(json.dumps(tweet_package))
         return True
 
     def on_error(self, error):
