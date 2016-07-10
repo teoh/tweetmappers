@@ -1,0 +1,10 @@
+(lp0
+Vnot_good
+p1
+aVterribl
+p2
+aVtrump
+p3
+aVnot_candid
+p4
+a.

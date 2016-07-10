@@ -1,7 +1,7 @@
 import nltk
 import pickle
 
-words_for_feature_extraction_pickle_path = './model/words_for_feature_extraction.p'
+words_for_feature_extraction_pickle_path = './model/vocabulary.p'
 
 # ==== THIS IS FOR TRAINING =======
 def get_all_words(list_of_token_lists):
