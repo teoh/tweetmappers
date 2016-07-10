@@ -18,6 +18,11 @@ with open('../credentials.json') as credentials_file:
 auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_secret)
 
+wordfilter = Wordfilter()
+with open('../sensitivewords.json') as sensitive_file:
+    sensitive_words = json.load(sensitive_file)['words']
+    wordfilter.addWords(sensitive_words)
+
 class TweetSubject(object):
     clinton = 1
     trump = 2
@@ -58,7 +63,6 @@ def tweet_in_us(tweet):
 
 class PrintTweetsListener(StreamListener):
     def on_data(self, data):
-        wordfilter = Wordfilter()
         tweet = json.loads(data)
         if tweet_in_us(tweet):
             subject = tweet_subject(tweet)
@@ -67,10 +71,10 @@ class PrintTweetsListener(StreamListener):
                 if location:
                     lon = location['lon']
                     lat = location['lat']
-                    print '################# Text ###################'
-                    print tweet['text']
                     if wordfilter.blacklisted(tweet['text']):
                         tweet['text'] = 'Hidden because possibly sensitive'
+                    print '################# Text ###################'
+                    print tweet['text']
                     tweet_package = {
                             'tweet': tweet,
                             'lon': lon,
