@@ -76,9 +76,10 @@ class PrintTweetsListener(StreamListener):
                     lat = location['lat']
                     score = get_sentiment(tweet['text'])
                     if wordfilter.blacklisted(tweet['text']):
-                        exp = '(%s)' % '|'.join(wordfilter.blacklist)
-                        r = re.compile(exp, re.IGNORECASE)
-                        tweet['text'] = r.sub('***', tweet['text'])
+#                        exp = '(%s)' % '|'.join(wordfilter.blacklist)
+#                        r = re.compile(exp, re.IGNORECASE)
+#                        tweet['text'] = r.sub('***', tweet['text'])
+                        return True
                     print '################# Text ###################'
                     print tweet['text']
                     tweet_package = {
