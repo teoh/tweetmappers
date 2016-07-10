@@ -1,1 +1,1 @@
-python backend/streaming.py
+python streaming.py
