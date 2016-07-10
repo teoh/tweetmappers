@@ -40,3 +40,10 @@ def batch_get_legit_tokens(tweet_str_list):
 	tknzr = TweetTokenizer(strip_handles=1,reduce_len=1,preserve_case=0)
 
 	return [get_legit_tokens(tweet, tknzr) for tweet in tweet_str_list]
+
+
+# for making actual classifications
+def get_legit_token_one_tweet(tweet_str):
+	tweet_str_list = [tweet_str]
+	token_list_list = batch_get_legit_tokens(tweet_str_list)
+	return token_list_list[0]
