@@ -65,12 +65,13 @@ class PrintTweetsListener(StreamListener):
                 if location:
                     lon = location['lon']
                     lat = location['lat']
-                    tweet_package = {
-                            'tweet': tweet,
-                            'lon': lon,
-                            'lat': lat
-                    }
-                    app.write(json.dumps(tweet_package))
+                    if not tweet['possibly_sensitive']:
+                        tweet_package = {
+                                'tweet': tweet,
+                                'lon': lon,
+                                'lat': lat
+                        }
+                        app.write(json.dumps(tweet_package))
         return True
 
     def on_error(self, error):
@@ -80,5 +81,4 @@ class PrintTweetsListener(StreamListener):
         return True
 
 stream = Stream(auth, PrintTweetsListener())
-stream.filter(track=['donald trump', 'hillary clinton', 'hillary', 'clinton', 'donald', 'trump'],
-              filter_level='low')
+stream.filter(track=['donald trump', 'hillary clinton', 'hillary', 'clinton', 'donald', 'trump'])
