@@ -99,4 +99,4 @@ class PrintTweetsListener(StreamListener):
         return True
 
 stream = Stream(auth, PrintTweetsListener())
-stream.filter(track=['donald trump', 'hillary clinton', 'hillary', 'clinton', 'donald', 'trump'])
+stream.filter(track=['donald trump', 'hillary clinton', 'hillary', 'clinton', 'donald', 'trump', 'hillaryclinton', 'donaldtrump', 'realdonaldtrump', '@realdonaldtrump', '@hillaryclinton'])
