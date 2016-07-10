@@ -74,7 +74,7 @@ class PrintTweetsListener(StreamListener):
                 if location:
                     lon = location['lon']
                     lat = location['lat']
-                    score = get_sentiment(tweet['text'])
+                    score = sentiment_classifer.get_sentiment(tweet['text'])
                     if wordfilter.blacklisted(tweet['text']):
 #                        exp = '(%s)' % '|'.join(wordfilter.blacklist)
 #                        r = re.compile(exp, re.IGNORECASE)
