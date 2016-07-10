@@ -87,7 +87,7 @@ class PrintTweetsListener(StreamListener):
                             'lon': lon,
                             'lat': lat,
                             'score': score,
-                            'candidate': 'hillary' if subject == TweetSubject.hillary else 'trump'
+                            'candidate': 'hillary' if subject == TweetSubject.clinton else 'trump'
                     }
                     app.write(json.dumps(tweet_package))
         return True
