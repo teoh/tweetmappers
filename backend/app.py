@@ -36,4 +36,5 @@ def main():
     ioloop.IOLoop.instance().start()
 
 my_thread = Thread(target=main, args=())
+my_thread.daemon = True
 my_thread.start()
