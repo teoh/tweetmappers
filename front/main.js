@@ -1,5 +1,6 @@
 var Markers = function (map) {
 
+    var infowindow;
     var hillary_positive_img = {
         url: 'hillary_positive.png',
         size: new google.maps.Size(40, 40),
@@ -127,6 +128,34 @@ var Markers = function (map) {
             map: map,
             icon: icon
         });
+
+        if (!trump) {
+            marker.addListener('click', function () {
+                var contentString = '<div id="popup"></div>';
+                try {
+                    infowindow.close();
+                    infowindow.setContent('');
+                } catch (err) {
+                    console.log(err);
+                }
+                infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+                infowindow.open(map, marker);
+                setTimeout(function () {
+                    window.twttr.widgets.createTweet(
+                        m.id,
+                        document.getElementById("popup"),
+                        {
+                            cards: 'hidden',
+                            conversation: 'none',
+                            align: 'center'
+                        }
+                    );
+                }, 100);
+            });
+        }
+
         if (m.sem == "trump") {
             marker.addListener('click', function () {
                 toggleWall();
@@ -171,7 +200,8 @@ function initMap() {
             lat: Number(data.lat),
             lng: Number(data.lon),
             score: data.score,
-            sem: data.candidate
+            sem: data.candidate,
+            id: data.tweet.id_str
         }, false);
         overlay.addTweet(data.tweet);
     };

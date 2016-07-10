@@ -3,16 +3,15 @@ window.overlay = function (map) {
     return {
         addTweet: function (tweet) {
             var div = document.createElement('div');
-            div.id = tweet.id;
+            div.id = "id_" + tweet.id_str;
             div.classList.add("tweet");
             Div.insertBefore(div, Div.firstChild);
             if (Div.childNodes.length > 20) {
                 Div.removeChild(Div.lastChild);
             }
             window.twttr.widgets.createTweet(
-                // "752019528977113088",
                 tweet.id_str,
-                document.getElementById(tweet.id),
+                div,
                 {
                     cards: 'hidden',
                     conversation: 'none',

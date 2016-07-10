@@ -37,3 +37,11 @@ html, body {
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
+/*#tweet-marker{*/
+    /*min-height: 100px;*/
+/*}*/
+
+#popup{
+    max-width: 225px;
+}
