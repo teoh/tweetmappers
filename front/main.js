@@ -1,4 +1,5 @@
 var Markers = function (map) {
+    
     var hillary_positive_img = {
         url: 'hillary_positive.png',
         size: new google.maps.Size(40, 40),
