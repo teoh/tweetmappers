@@ -1,13 +1,25 @@
 
 var Markers = function (map) {
-    var hillary_img = {
-        url: 'hillary.png',
+    var hillary_positive_img = {
+        url: 'hillary_positive.png',
         size: new google.maps.Size(30, 30),
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(0, 32)
     };
-    var trump_img = {
-        url: 'trump.png',
+    var hillary_negative_img = {
+        url: 'hillary_negative.png',
+        size: new google.maps.Size(30, 30),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(0, 32)
+    };
+    var trump_positive_img = {
+        url: 'trump_positive.png',
+        size: new google.maps.Size(30, 30),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(0, 30)
+    };
+    var trump_negative_img = {
+        url: 'trump_negative.png',
         size: new google.maps.Size(30, 30),
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(0, 30)
@@ -15,11 +27,17 @@ var Markers = function (map) {
     var markers = [];
     return {
         addMarker: function (m) {
+            var icon;
+            if (m.sem == "hillary"){
+                icon = m.score >= 0.0 ? hillary_positive_img : hillary_negative_img
+            }
+            else{
+                icon = m.score >= 0.0 ? trump_positive_img : trump_negative_img
+            }
             var marker = new google.maps.Marker({
                 position: {lat: m.lat, lng: m.lng},
                 map: map,
-                icon: m.sem == "hillary" ? hillary_img : trump_img,
-                title: m.text
+                icon: icon
             });
             markers.push(marker);
             if (markers.length > 10) {
@@ -44,8 +62,8 @@ function initMap() {
         markers.addMarker({
             lat: Number(data.lat),
             lng: Number(data.lon),
-            text: "Hillary",
-            sem: (Math.random() > 0.5) ? "hillary" : "trump"
+            score: data.score,
+            sem: data.candidate
         });
         overlay.addTweet(data.tweet);
     };
