@@ -31,5 +31,5 @@ def main():
     app.listen(8888)
     ioloop.IOLoop.instance().start()
 
-my_thread = Thread(main)
+my_thread = Thread(target=main, args=())
 my_thread.start()
