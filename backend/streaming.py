@@ -74,7 +74,9 @@ class PrintTweetsListener(StreamListener):
         return True
 
     def on_error(self, error):
+        print '################# Error ######################'
         print json.dumps(json.loads(error), indent=4)
+        print '################# End Error ######################'
         return True
 
 stream = Stream(auth, PrintTweetsListener())

@@ -14,9 +14,12 @@ class SocketHandler(websocket.WebSocketHandler):
         cl.remove(self)
 
 def write(message):
-    print message
-    print cl
+    print 'Sending...'
     [con.write_message(message) for con in cl]
+    print 'Success!'
+    print '############## Connections ##################'
+    print cl
+    print '############## Cool! ##################'
 
 app = web.Application([
     (r'/ws', SocketHandler),
