@@ -1,9 +1,12 @@
 import nltk
 import csv
 from time import time as tt
+import pickle
 
 from cleaning import *
 from features import *
+
+trained_model_pickle_path = './model/classif_model.p'
 
 # ======================
 
@@ -25,24 +28,24 @@ t = tt()
 cleaned_tweets = batch_get_legit_tokens(raw_tweets)
 
 # extract features
-word_features = create_features(get_all_words(cleaned_tweets))
+create_features(get_all_words(cleaned_tweets))
 
-print len(word_features)
+assert len(cleaned_tweets) == len(labels)
+training_set = nltk.classify.apply_features(extract_features,zip(cleaned_tweets,labels))
 
-print cleaned_tweets[0]
-
-print extract_features(cleaned_tweets[0])
-
-print tt() - t
-
-
-
+print training_set[0]
 
 # train model
 
+classifier = nltk.NaiveBayesClassifier.train(training_set)
+print tt() - t
 
+# print classifier.show_most_informative_features()
 
+tweet_str = 'RT @sunlorrie: Imagine if this had gone to a jury: Poll: 54 %% of Voters Think FBI Should have Criminally Indicted Hillary Clinton https://t'
+tweet_ft = [ extract_features(t) for t in batch_get_legit_tokens([tweet_str]) ]
+print classifier.classify( tweet_ft[0])
 
 # output the representation
 
-print "hello"
+pickle.dump(classifier,open(trained_model_pickle_path,'wb'))
