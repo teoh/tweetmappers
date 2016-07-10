@@ -3,16 +3,11 @@ from pprint import pprint
 
 class Tweet(object):
 
-	def __init__(self, text_, location_str_, label_):
+	def __init__(self, tid_, text_, location_str_, label_):
+		self.tid = tid_
 		self.text = text_
 		self.location_str = location_str_
 		self.label = label_
-
-
-	def print_tweet(self):
-		print self.text
-		print 'Location = ' + self.location_str
-		print '########################################################################################################################'
 
 
 def treat_quotes(input_file):
@@ -52,11 +47,12 @@ def get_tweets(data):
 	tweets = []
 	for d in data['statuses']:
 		# print json.dumps(d, indent=4)
+		tid = d.pop('id', 0)
 		text = strip_non_ascii(d.pop('text', {})).replace('\n', ' ')
 		user = d.pop('user', {})
 		location_str = user.pop('location', '')
 		label = 0
-		tweets.append(Tweet(text, location_str, label))
+		tweets.append(Tweet(tid, text, location_str, label))
 
 	return tweets
 
@@ -65,9 +61,13 @@ def process_tweets(candidate):
 	data = parse_json(treated_file)
 
 	with open('tweets_%s.txt' % candidate, 'w') as f:
+		id_set = set()  # Avoid duplicates
 		for tweet in get_tweets(data):
-			f.write(tweet.text + '\n')
+			if tweet.tid not in id_set:
+				f.write(tweet.text + '\n')
+				id_set.add(tweet.tid)
+		print "Number of distinct tweets processed = ", len(id_set)
 
 
-process_tweets('hillary')
+process_tweets('trump')
 
