@@ -9,7 +9,6 @@ window.overlay = function (map) {
             if (Div.childNodes.length > 20) {
                 Div.removeChild(Div.lastChild);
             }
-            console.log(tweet.id);
             window.twttr.widgets.createTweet(
                 // "752019528977113088",
                 tweet.id_str,
@@ -20,7 +19,6 @@ window.overlay = function (map) {
                     align: 'center'
                 }
             );
-            console.log(tweet);
         }
         // $.ajax({
         // url: "https://publish.twitter.com/oembed?url=" + tweet.url,

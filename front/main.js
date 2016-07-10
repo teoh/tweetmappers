@@ -26,7 +26,9 @@ var Markers = function (map) {
     };
     var isWall = false;
     var toggleWall = function () {
-        if (isWall) {return;}
+        if (isWall) {
+            return;
+        }
         isWall = true;
         var coords = [{"lat": 32.43561304116276, "lng": -117.1142578125}, {
             "lat": 32.43561304116276,
@@ -146,7 +148,15 @@ var Markers = function (map) {
     }
 };
 
-var ws = new WebSocket("ws://192.241.220.196:8888/ws");
+connect = function (location, cb) {
+    var ws = new WebSocket(location);
+    ws.onmessage = cb;
+    ws.onclose = function () {
+        setTimeout(function () {
+            connect(location, cb)
+        }, 500);
+    }
+};
 
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -155,7 +165,7 @@ function initMap() {
     });
     var markers = Markers(map);
     var overlay = window.overlay(map);
-    ws.onmessage = function (evt) {
+    var onmessage = function (evt) {
         var data = JSON.parse(evt.data);
         markers.addMarker({
             lat: Number(data.lat),
@@ -165,4 +175,5 @@ function initMap() {
         }, false);
         overlay.addTweet(data.tweet);
     };
+    connect("ws://make.americagreataga.in:8888/ws", onmessage);
 }
