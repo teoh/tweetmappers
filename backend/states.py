@@ -62,7 +62,7 @@ regions = {
         'Washington': 'D.C.',
 }
 
-def in_US(location):
+def in_us(location):
     if location == 'Washington DC':
         return True
     if location == 'Washington D.C.':
@@ -73,9 +73,9 @@ def in_US(location):
             return True
     return False
 
-assert in_US('San Francisco, CA')
-assert in_US('New York, New York')
-assert in_US('hella, New York')
-assert in_US('Washington, D.C.')
-assert not in_US('New York, China')
-assert not in_US('hella, Jamaica')
+assert in_us('San Francisco, CA')
+assert in_us('New York, New York')
+assert in_us('hella, New York')
+assert in_us('Washington, D.C.')
+assert not in_us('New York, China')
+assert not in_us('hella, Jamaica')
