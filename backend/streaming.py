@@ -66,7 +66,7 @@ def tweet_in_us(tweet):
 
 class PrintTweetsListener(StreamListener):
     def on_data(self, data):
-        tweet = json.loads(data)
+        tweet = json.loads(unicode(data))
         if tweet_in_us(tweet):
             subject = tweet_subject(tweet)
             if subject != TweetSubject.other:
