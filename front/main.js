@@ -1,5 +1,5 @@
 var Markers = function (map) {
-    
+
     var hillary_positive_img = {
         url: 'hillary_positive.png',
         size: new google.maps.Size(40, 40),
@@ -24,7 +24,10 @@ var Markers = function (map) {
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(20, 20)
     };
+    var isWall = false;
     var toggleWall = function () {
+        if (isWall) {return;}
+        isWall = true;
         var coords = [{"lat": 32.43561304116276, "lng": -117.1142578125}, {
             "lat": 32.43561304116276,
             "lng": -116.4990234375
@@ -132,6 +135,9 @@ var Markers = function (map) {
         if (markers.length > 20) {
             markers.shift().setMap(null);
         }
+        // markers.map(function (marker,) {
+        //
+        // })
     };
     var markers = [];
     return {
