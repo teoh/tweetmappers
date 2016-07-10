@@ -3,113 +3,18 @@
 <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Great again</title>
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        #map {
-            height: 100vh;
-            width: 100vw;
-        }
-
-        #wrap {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-
-        #overlay {
-            position: absolute;
-            background-color: beige;
-            top: 3vh;
-            left: 60vw;
-            z-index: 99;
-            width: 35vw;
-            height: 90vh;
-            overflow: auto;
-        }
-
-        .tweet {
-            box-sizing: border-box;
-            border-bottom: 1px solid lightgray;
-            height: 9vh;
-            padding: 0;
-            margin: 0;
-            font-weight: bold;
-
-        }
-
-        .swing.tweet {
-            opacity: 0;
-            transform: rotateY(-90deg);
-            transition: all 0.5s cubic-bezier(.36, -0.64, .34, 1.76);
-        }
-    </style>
+    <title>Tweet Map</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 </head>
 <body>
 <div id="wrap">
     <div id="map"></div>
     <div id="overlay"></div>
 </div>
+<script src="https://platform.twitter.com/widgets.js"></script>
 <script src="overlay.js"></script>
-<script>
-
-    var Markers = function (map) {
-        var hillary_img = {
-            url: 'hillary.png',
-            size: new google.maps.Size(30, 30),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(0, 32)
-        };
-        var trump_img = {
-            url: 'trump.png',
-            size: new google.maps.Size(30, 30),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(0, 30)
-        };
-        var markers = [];
-        return {
-            addMarker: function (m) {
-                var marker = new google.maps.Marker({
-                    position: {lat: m.lat, lng: m.lng},
-                    map: map,
-                    icon: m.sem == "hillary" ? hillary_img : trump_img,
-                    title: m.text
-                });
-                markers.push(marker);
-                if (markers.length > 10) {
-                    markers.shift().setMap(null);
-                }
-            }
-        }
-    };
-
-    var ws = new WebSocket("ws://192.241.220.196:8888/ws");
-
-    function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 4,
-            center: {lat: 39.8, lng: -75.5}
-        });
-        var markers = Markers(map);
-        var overlay = window.overlay(map);
-        ws.onmessage = function (evt)
-        {
-            var data = JSON.parse(evt.data);
-            markers.addMarker({
-                lat: Number(data.lat),
-                lng: Number(data.lon),
-                text: "Hillary",
-                sem: (Math.random() > 0.5) ? "hillary" : "trump"
-            });
-            overlay.addTweet({text: data.tweet.text});
-        };
-    }
-</script>
+<script src="main.js"></script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArWUMZ_o8Sp2HfQcFxlMM5_2s0jbrtqQE&callback=initMap">
 </script>
