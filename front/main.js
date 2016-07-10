@@ -40,7 +40,7 @@ var Markers = function (map) {
                 icon: icon
             });
             markers.push(marker);
-            if (markers.length > 10) {
+            if (markers.length > 20) {
                 markers.shift().setMap(null);
             }
         }

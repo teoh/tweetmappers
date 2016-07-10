@@ -6,7 +6,7 @@ window.overlay = function (map) {
             div.id = tweet.id;
             div.classList.add("tweet");
             Div.insertBefore(div, Div.firstChild);
-            if (Div.childNodes.length > 10) {
+            if (Div.childNodes.length > 20) {
                 Div.removeChild(Div.lastChild);
             }
             console.log(tweet.id);
