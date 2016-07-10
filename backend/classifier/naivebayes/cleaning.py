@@ -30,14 +30,13 @@ def get_legit_tokens(tweet_str, tknzr):
 	raw_tokens = tknzr.tokenize(tweet_str)
 	stemmer = SnowballStemmer("english")
 
-	legit_tokens = [w.replace("'", "") for w in raw_tokens if not re.search(r"""[^a-z.!\?,\']""", w) and w not in stopword_list]
+	legit_tokens = [re.sub(r"""[#\']""",'',w) for w in raw_tokens if not re.search(r"""[^a-z.!\?,\'#]""", w) and w not in stopword_list]
 	treated_tokens = handle_negation(legit_tokens)
 
-	return [stemmer.stem(w) for w in treated_tokens]
+	return [stemmer.stem(w) for w in treated_tokens if w]
 
 
 def batch_get_legit_tokens(tweet_str_list):
 	tknzr = TweetTokenizer(strip_handles=1,reduce_len=1,preserve_case=0)
 
 	return [get_legit_tokens(tweet, tknzr) for tweet in tweet_str_list]
-
