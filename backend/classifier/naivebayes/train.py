@@ -3,6 +3,7 @@ import csv
 from time import time as tt
 
 from cleaning import *
+from features import *
 
 # ======================
 
@@ -22,10 +23,12 @@ with open('./data/hillary_sample.csv') as csvfile:
 
 t = tt()
 cleaned_tweets = batch_get_legit_tokens(raw_tweets)
-print tt() -t
 
 # extract features
+word_features = create_features(get_all_words(cleaned_tweets))
 
+print len(word_features)
+print tt() -t
 
 
 # train model
