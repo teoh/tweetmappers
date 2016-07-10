@@ -9,14 +9,10 @@ class SocketHandler(websocket.WebSocketHandler):
         return True
 
     def open(self):
-	print "open"
-        if self not in cl:
-            cl.add(self)
+        cl.add(self)
 
     def on_close(self):
-        print "close"
-	if self in cl:
-            cl.remove(self)
+        cl.remove(self)
 
 def write(message):
     [con.write_message(message) for con in cl]
