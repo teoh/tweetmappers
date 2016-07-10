@@ -98,5 +98,12 @@ class PrintTweetsListener(StreamListener):
         print '################# End Error ######################'
         return True
 
-stream = Stream(auth, PrintTweetsListener())
-stream.filter(track=['donald trump', 'hillary clinton', 'hillary', 'clinton', 'donald', 'trump', 'hillaryclinton', 'donaldtrump', 'realdonaldtrump', '@realdonaldtrump', '@hillaryclinton'])
+def main():
+    stream = Stream(auth, PrintTweetsListener())
+    stream.filter(track=['donald trump', 'hillary clinton', 'hillary', 'clinton', 'donald', 'trump', 'hillaryclinton', 'donaldtrump', 'realdonaldtrump', '@realdonaldtrump', '@hillaryclinton'])
+
+while 1:
+    try:
+        main()
+    except:
+        pass
