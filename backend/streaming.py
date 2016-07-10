@@ -1,6 +1,7 @@
 import tweepy
 import states
 import geocode
+import app
 import json
 import pprint
 
@@ -64,7 +65,12 @@ class PrintTweetsListener(StreamListener):
                 if location:
                     lon = location['lon']
                     lat = location['lat']
-                    print json.dumps(json.loads(data), indent=4)
+                    tweet_package = {
+                            'tweet': tweet,
+                            'lon': lon,
+                            'lat': lat
+                    }
+                    app.write(json.dumps(tweet_package))
         return True
 
     def on_error(self, error):

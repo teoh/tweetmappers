@@ -4,7 +4,6 @@ import json
 cl = set()
 
 class SocketHandler(websocket.WebSocketHandler):
-    
     def check_origin(self, origin):
         return True
 
@@ -15,6 +14,8 @@ class SocketHandler(websocket.WebSocketHandler):
         cl.remove(self)
 
 def write(message):
+    print message
+    print cl
     [con.write_message(message) for con in cl]
 
 app = web.Application([
