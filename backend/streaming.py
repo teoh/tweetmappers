@@ -4,6 +4,7 @@ import geocode
 import app
 import json
 import pprint
+import re
 
 from tweepy import OAuthHandler
 from tweepy import Stream
@@ -72,7 +73,9 @@ class PrintTweetsListener(StreamListener):
                     lon = location['lon']
                     lat = location['lat']
                     if wordfilter.blacklisted(tweet['text']):
-                        tweet['text'] = 'Hidden because possibly sensitive'
+                        exp = '(%s)' % '|'.join(wordfilter.bad_words)
+                        r = re.compile(exp, re.IGNORECASE)
+                        tweet['text'] = r.sub('***', tweet['text'])
                     print '################# Text ###################'
                     print tweet['text']
                     tweet_package = {
