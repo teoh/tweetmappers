@@ -1,16 +1,33 @@
 import nltk
 import csv
+from time import time as tt
 
-# parse the tweets 
+from cleaning import *
 
-data_raw = []
+# ======================
+
+# collect the tweets
+
+raw_tweets = []
+labels = []
 
 with open('./data/hillary_sample.csv') as csvfile:
 	trainreader = csv.reader(csvfile,delimiter=',',quotechar='"')
 	for row in trainreader:
-		data_raw.append((row[1],row[0]))
+		raw_tweets.append(row[1])
+		labels.append(row[0])
 
-print type(data_raw[0])
+
+# clean the tweets 
+
+t = tt()
+cleaned_tweets = batch_get_legit_tokens(raw_tweets)
+print tt() -t
+
+# extract features
+
+
+
 # train model
 
 
