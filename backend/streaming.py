@@ -73,7 +73,7 @@ class PrintTweetsListener(StreamListener):
                     lon = location['lon']
                     lat = location['lat']
                     if wordfilter.blacklisted(tweet['text']):
-                        exp = '(%s)' % '|'.join(wordfilter.bad_words)
+                        exp = '(%s)' % '|'.join(wordfilter.blacklist)
                         r = re.compile(exp, re.IGNORECASE)
                         tweet['text'] = r.sub('***', tweet['text'])
                     print '################# Text ###################'
